@@ -18,7 +18,7 @@ GAMES = [
         "category": "Platformer / Shooter",
         "description": "I know you loved the ShooterBunnyRageGame. Here is the sequel. (don't worry it's not a rage game)",
         "image": "/static/images/aoti.png",
-        "game_url": "https://programexy.github.io/aoti.png"
+        "game_url": "https://programexy.github.io/aoti"
     },
     {
         "id": "monking",
@@ -29,6 +29,48 @@ GAMES = [
         "game_url": "womp womp"
     }
 ]
+
+
+ORIGAMI_PROJECTS = [
+    {
+        "id": "crane",
+        "title": "Classic Paper Crane (Orizuru)",
+        "difficulty": "Intermediate",
+        "description": "The iconic Japanese paper crane representing peace, hope, and longevity.",
+        "image": "/static/images/crane.jpg",
+        "diagram_image": "/static/images/crane_diagram.jpg",
+        "video_url": "https://www.youtube.com/embed/KfnyopxdJXQ",
+        "steps": [
+            "Start with a square piece of paper color-side up.",
+            "Fold in half diagonally both ways, then unfold.",
+            "Turn paper over and fold in half horizontally and vertically.",
+            "Collapse into a Square Base using the existing creases.",
+            "Fold left and right edges into the center line to create a kite shape.",
+            "Perform a Petal Fold upwards on both sides to complete the Bird Base.",
+            "Narrow the legs, fold head and tail up with inside reverse folds, and pull wings gently apart."
+        ]
+    },
+    {
+        "id": "jumping-frog",
+        "title": "Interactive Hopping Frog",
+        "difficulty": "Easy",
+        "description": "An action origami model that physically hops when you press down on its back legs.",
+        "image": "/static/images/frog.jpg",
+        "diagram_image": "/static/images/frog_diagram.jpg",
+        "video_url": "https://www.youtube.com/embed/14I9l6kH9_M",
+        "steps": [
+            "Start with a rectangular sheet of paper or fold square paper in half.",
+            "Create a Waterbomb Base on the top half of the sheet.",
+            "Fold bottom corners up to meet the nose to form front legs.",
+            "Accordion fold the bottom section to form spring-loaded hind legs.",
+            "Flip over and press the rear fold to make it jump!"
+        ]
+    }
+]
+
+@app.route("/origami")
+def origami_page():
+    return render_template("origami.html", projects=ORIGAMI_PROJECTS)
 
 # Developer Info Data
 DEVELOPER = {

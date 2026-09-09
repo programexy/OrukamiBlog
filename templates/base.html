@@ -3,46 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Orukami BLOG{% endblock %}</title>
-    <!-- Google Fonts -->
+    <title>{% block title %}Orukami Blog{% endblock %}</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
-    <!-- Header Navigation -->
     <header>
-        <div class="logo"><a href="{{ url_for('home') }}">Orukami<span>BLOG</span></a></div>
+        <div class="logo"><a href="{{ url_for('home') }}">ORU<span>KAMI</span></a></div>
         <nav>
             <a href="{{ url_for('home') }}" class="{% if request.endpoint == 'home' %}active{% endif %}">Home</a>
+            <a href="{{ url_for('origami_page') }}" class="{% if request.endpoint == 'origami_page' %}active{% endif %}">Origami</a>
             <a href="{{ url_for('games_page') }}" class="{% if request.endpoint == 'games_page' %}active{% endif %}">Games</a>
             <a href="{{ url_for('about_page') }}" class="{% if request.endpoint == 'about_page' %}active{% endif %}">About Me</a>
         </nav>
     </header>
 
-    <!-- Main Page Content Block -->
     {% block content %}{% endblock %}
 
-    <!-- Global Play Game Modal -->
-    <div id="gameModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modalTitle">Game Title</h2>
-                <button class="close-btn" onclick="closeGameModal()">&times;</button>
-            </div>
-            <div class="iframe-container">
-                <iframe id="gameIframe" src="" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 OrukamiBlog. Built with Flask & Render.</p>
+        <p>&copy; 2026 Orukami Blog. Built with Flask & Render.</p>
     </footer>
 
-    <!-- JS -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
