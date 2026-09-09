@@ -26,7 +26,7 @@ GAMES = [
         "category": "Platformer / Adventure",
         "description": "Wowzers. King of the jungle?? (Wait aren't those lions?)",
         "image": "https://picsum.photos/id/1059/600/400",
-        "game_url": "https://programexy.github.io/Monking"
+        "game_url": "womp womp"
     }
 ]
 
