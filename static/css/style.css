@@ -20,6 +20,9 @@ body {
     color: var(--text-main);
     font-family: var(--font-body);
     line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Header */
@@ -35,10 +38,12 @@ header {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.logo {
+.logo a {
     font-family: var(--font-heading);
     font-size: 1.5rem;
     font-weight: 900;
+    color: var(--text-main);
+    text-decoration: none;
 }
 
 .logo span {
@@ -53,8 +58,30 @@ nav a {
     transition: color 0.3s;
 }
 
-nav a:hover {
+nav a:hover, nav a.active {
     color: var(--accent-color);
+}
+
+/* Page Helpers */
+.page-padding {
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.page-header h1 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.page-header p {
+    color: var(--text-muted);
 }
 
 /* Hero Section */
@@ -75,12 +102,29 @@ nav a:hover {
 .hero p {
     color: var(--text-muted);
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0 auto 1.5rem auto;
+}
+
+.cta-btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: #000;
+    padding: 0.8rem 1.8rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background-color 0.3s;
+}
+
+.cta-btn:hover {
+    background-color: var(--accent-hover);
 }
 
 /* Game Grid */
 .container {
     padding: 3rem 5%;
+    flex: 1;
 }
 
 .section-title {
@@ -166,6 +210,75 @@ nav a:hover {
     font-size: 0.9rem;
 }
 
+/* About Page Styling */
+.about-card {
+    background-color: var(--card-bg);
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 12px;
+    padding: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.about-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color);
+}
+
+.about-header h1 {
+    font-family: var(--font-heading);
+}
+
+.dev-title {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.about-body h2 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+}
+
+.skills-list {
+    list-style-type: square;
+    padding-left: 1.2rem;
+    color: var(--text-muted);
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-btn {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: border-color 0.3s, color 0.3s;
+}
+
+.social-btn:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
 /* Modal */
 .modal {
     display: none;
@@ -224,20 +337,12 @@ nav a:hover {
     height: 100%;
 }
 
-/* About Section */
-.about {
-    padding: 4rem 5%;
+/* Footer */
+footer {
     text-align: center;
-    background-color: #121420;
-}
-
-.about h2 {
-    font-family: var(--font-heading);
-    margin-bottom: 1rem;
-}
-
-.about p {
-    max-width: 700px;
-    margin: 0 auto;
+    padding: 2rem;
+    background-color: #0b0c13;
     color: var(--text-muted);
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }

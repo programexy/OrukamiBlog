@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}About Me | Game Vault{% endblock %}
+
+{% block content %}
+<main class="container page-padding">
+    <div class="about-card">
+        <div class="about-header">
+            <img src="https://picsum.photos/id/1025/150/150" alt="Developer Avatar" class="avatar">
+            <div>
+                <h1>{{ dev.name }}</h1>
+                <p class="dev-title">{{ dev.title }}</p>
+            </div>
+        </div>
+
+        <div class="about-body">
+            <h2>Bio</h2>
+            <p>{{ dev.bio }}</p>
+
+            <h2>Tech & Tools I Use</h2>
+            <ul class="skills-list">
+                {% for skill in dev.skills %}
+                <li>{{ skill }}</li>
+                {% endfor %}
+            </ul>
+
+            <h2>Connect with Me</h2>
+            <div class="social-links">
+                <a href="{{ dev.github }}" target="_blank" class="social-btn">GitHub</a>
+                <a href="{{ dev.twitter }}" target="_blank" class="social-btn">Twitter/X</a>
+                <a href="{{ dev.itch }}" target="_blank" class="social-btn">Itch.io</a>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

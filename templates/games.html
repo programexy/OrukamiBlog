@@ -1,16 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}Home | Game Vault{% endblock %}
+{% block title %}All Games | Game Vault{% endblock %}
 
 {% block content %}
-<section class="hero">
-    <h1>PLAY MY CREATIONS</h1>
-    <p>A personal showcase of web games. Check out my latest featured titles below or browse the full library!</p>
-    <a href="{{ url_for('games_page') }}" class="cta-btn">View All Games</a>
-</section>
+<main class="container page-padding">
+    <div class="page-header">
+        <h1>All Games</h1>
+        <p>Explore my entire portfolio of browser games. Click any game to play immediately.</p>
+    </div>
 
-<main class="container">
-    <h2 class="section-title">Featured Games</h2>
     <div class="game-grid">
         {% for game in games %}
         <div class="game-card">
