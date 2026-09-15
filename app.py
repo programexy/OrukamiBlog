@@ -31,8 +31,8 @@ GAMES = [
 ]
 
 DEVELOPER = {
-    "name": "Orukami Orukami! (heck naw im gonna give u my real name)",
-    "title": "Indie Game Developer & Designer, ORIGAMIST??",
+    "name": "Orukami",
+    "title": "Indie Game Developer & Designer, Origamist",
     "bio": "pls help im losin brian cells",
     "skills": ["Python / Flask", "JavaScript / HTML5", "Pygame", "Godot", "Pixel Art / Pixilart"],
     "github": "https://github.com/programexy",
