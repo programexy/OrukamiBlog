@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <div class="logo" href="{{ url_for('home') }}" class="logo-container"><a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='favicon/favicon.png') }}" alt="Orukami Logo" class="logo-img">
+        <div class="logo avatar" href="{{ url_for('home') }}" class="logo-container"><a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='favicon/favicon.png') }}" alt="Orukami Logo" class="logo-img">
             ORU<span>KAMI</span></a></div>
         <nav>
             <a href="{{ url_for('home') }}" class="{% if request.endpoint == 'home' %}active{% endif %}">Home</a>
