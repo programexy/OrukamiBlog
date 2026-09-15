@@ -30,16 +30,24 @@ GAMES = [
     }
 ]
 
-
+DEVELOPER = {
+    "name": "Orukami Orukami! (heck naw im gonna give u my real name)",
+    "title": "Indie Game Developer & Designer, ORIGAMIST??",
+    "bio": "pls help im losin brian cells",
+    "skills": ["Python / Flask", "JavaScript / HTML5", "Pygame", "Godot", "Pixel Art / Pixilart"],
+    "github": "https://github.com/programexy",
+}
+# Sample Origami Data with featured flags
 ORIGAMI_PROJECTS = [
     {
         "id": "crane",
-        "title": "Classic Paper Crane (Orizuru)",
+        "title": "Classic Paper Crane",
         "difficulty": "Intermediate",
-        "description": "The iconic Japanese paper crane representing peace, hope, and longevity.",
-        "image": "/static/images/crane.jpg",
+        "description": "bird fly fly",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_-CAYXvjplClYeFsHVQMvTyHKOfOdxWnSCADNnd1v6w&s",
         "diagram_image": "/static/images/crane_diagram.jpg",
         "video_url": "https://www.youtube.com/embed/KfnyopxdJXQ",
+        "featured": True,
         "steps": [
             "Start with a square piece of paper color-side up.",
             "Fold in half diagonally both ways, then unfold.",
@@ -54,10 +62,11 @@ ORIGAMI_PROJECTS = [
         "id": "jumping-frog",
         "title": "Interactive Hopping Frog",
         "difficulty": "Easy",
-        "description": "An action origami model that physically hops when you press down on its back legs.",
-        "image": "/static/images/frog.jpg",
+        "description": "boingy boing",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiCO-zF4PoMsC10Gi5qkq3AtHh2R8palz-2wwLVAxXwg&s=10",
         "diagram_image": "/static/images/frog_diagram.jpg",
         "video_url": "https://www.youtube.com/embed/14I9l6kH9_M",
+        "featured": True,
         "steps": [
             "Start with a rectangular sheet of paper or fold square paper in half.",
             "Create a Waterbomb Base on the top half of the sheet.",
@@ -68,24 +77,20 @@ ORIGAMI_PROJECTS = [
     }
 ]
 
+@app.route("/")
+def home():
+    # Filter projects marked as featured
+    featured_origami = [p for p in ORIGAMI_PROJECTS if p.get("featured")]
+    featured_games = GAMES[:2]
+    return render_template("index.html", featured_origami=featured_origami, games=featured_games)
+
+
+
 @app.route("/origami")
 def origami_page():
     return render_template("origami.html", projects=ORIGAMI_PROJECTS)
 
 # Developer Info Data
-DEVELOPER = {
-    "name": "Orukami Orukami! (heck naw im gonna give u my real name)",
-    "title": "Indie Game Developer & Designer, ORIGAMIST??",
-    "bio": "pls help im losin brian cells",
-    "skills": ["Python / Flask", "JavaScript / HTML5", "Pygame", "Godot", "Pixel Art / Pixilart"],
-    "github": "https://github.com/programexy",
-}
-
-@app.route("/")
-def home():
-    # Show featured games on the homepage
-    featured_games = GAMES[:2]
-    return render_template("index.html", games=featured_games)
 
 @app.route("/games")
 def games_page():

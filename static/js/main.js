@@ -1,35 +1,89 @@
+function openGameModal(title, url) {
+    const modal = document.getElementById("gameModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const gameIframe = document.getElementById("gameIframe");
+
+    if (modalTitle) modalTitle.innerText = title;
+    if (gameIframe) gameIframe.src = url;
+    if (modal) modal.style.display = "flex";
+}
+
+function closeGameModal() {
+    const modal = document.getElementById("gameModal");
+    const gameIframe = document.getElementById("gameIframe");
+
+    if (gameIframe) gameIframe.src = ""; // Stops game audio on close
+    if (modal) modal.style.display = "none";
+}
+
 function openOrigamiModal(id) {
-    const rawData = document.getElementById(`data-${id}`).textContent;
-    const project = JSON.parse(rawData);
+    const dataElement = document.getElementById(`data-${id}`);
+    if (!dataElement) {
+        console.error(`Data script element "data-${id}" was not found.`);
+        return;
+    }
 
-    document.getElementById('origamiTitle').innerText = project.title;
-    document.getElementById('origamiDescription').innerText = project.description;
-    document.getElementById('origamiVideo').src = project.video_url;
-    document.getElementById('origamiImage').src = project.image;
-    document.getElementById('origamiDiagram').src = project.diagram_image;
+    try {
+        const project = JSON.parse(dataElement.textContent);
 
-    // Render Steps List
-    const stepsContainer = document.getElementById('origamiSteps');
-    stepsContainer.innerHTML = '';
-    project.steps.forEach(step => {
-        const li = document.createElement('li');
-        li.innerText = step;
-        stepsContainer.appendChild(li);
-    });
+        // Target Modal Elements
+        const titleElem = document.getElementById('origamiTitle');
+        const descElem = document.getElementById('origamiDescription');
+        const videoElem = document.getElementById('origamiVideo');
+        const imgElem = document.getElementById('origamiImage');
+        const diagramElem = document.getElementById('origamiDiagram');
+        const stepsContainer = document.getElementById('origamiSteps');
 
-    document.getElementById('origamiModal').style.display = 'flex';
+        // Populate Text and Media
+        if (titleElem) titleElem.innerText = project.title || 'Origami Project';
+        if (descElem) descElem.innerText = project.description || '';
+        if (videoElem) videoElem.src = project.video_url || '';
+        if (imgElem) imgElem.src = project.image || '';
+        if (diagramElem) diagramElem.src = project.diagram_image || '';
+
+        // Populate Step-by-Step Instructions List
+        if (stepsContainer) {
+            stepsContainer.innerHTML = '';
+            if (project.steps && Array.isArray(project.steps)) {
+                project.steps.forEach(step => {
+                    const li = document.createElement('li');
+                    li.innerText = step;
+                    stepsContainer.appendChild(li);
+                });
+            }
+        }
+
+        // Show Origami Modal
+        const modal = document.getElementById('origamiModal');
+        if (modal) modal.style.display = 'flex';
+
+    } catch (error) {
+        console.error('Error parsing origami project JSON:', error);
+    }
 }
 
 function closeOrigamiModal() {
     const modal = document.getElementById('origamiModal');
-    document.getElementById('origamiVideo').src = ''; // Stop video audio on close
-    modal.style.display = 'none';
+    const videoElem = document.getElementById('origamiVideo');
+    
+    // Clear video src to stop video audio on close
+    if (videoElem) videoElem.src = '';
+    if (modal) modal.style.display = 'none';
 }
 
-// Close when clicking outside modal box
+/* ==========================================================================
+   GLOBAL CLICK EVENT (Close Modals on Background Click)
+   ========================================================================== */
+
 window.onclick = function(event) {
-    const modal = document.getElementById('origamiModal');
-    if (event.target === modal) {
+    const origamiModal = document.getElementById('origamiModal');
+    const gameModal = document.getElementById('gameModal');
+
+    if (event.target === origamiModal) {
         closeOrigamiModal();
+    }
+    
+    if (event.target === gameModal) {
+        closeGameModal();
     }
 };

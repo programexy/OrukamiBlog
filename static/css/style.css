@@ -178,6 +178,7 @@ nav a:hover, nav a.active {
     border-radius: 25px;
     cursor: pointer;
     opacity: 0;
+    pointer-events: auto;
     transition: opacity 0.3s, background-color 0.3s;
 }
 
@@ -350,6 +351,8 @@ footer {
 /* Clickable Origami Cards */
 .clickable-card {
     cursor: pointer;
+    text-decoration: none;
+    color: var(--text-main)
 }
 
 .card-overlay {
@@ -368,6 +371,7 @@ footer {
     font-weight: 700;
     color: #000;
     background-color: rgba(0, 255, 204, 0.8);
+    pointer-events: none;
 }
 
 .card-img-container:hover .card-overlay {
@@ -427,3 +431,25 @@ footer {
     margin-bottom: 0.8rem;
     line-height: 1.5;
 }
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between logo image and text */
+    text-decoration: none;
+}
+
+.logo-img {
+    height: 36px; /* Adjust height to fit your navbar size */
+    width: auto;  /* Maintains aspect ratio */
+    object-fit: contain;
+}
+
+.logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    letter-spacing: 1px;
+}
+
