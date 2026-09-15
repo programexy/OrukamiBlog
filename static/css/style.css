@@ -443,11 +443,13 @@ footer {
     height: 36px; /* Adjust height to fit your navbar size */
     width: auto;  /* Maintains aspect ratio */
     object-fit: contain;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color);
 }
 
 .logo-text {
     font-family: var(--font-heading);
-    font-size: 1.5rem;
+    font-size: 36px;
     font-weight: 700;
     color: var(--accent-color);
     letter-spacing: 1px;
