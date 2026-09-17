@@ -10,14 +10,33 @@
 </head>
 <body>
     <header>
-        <div class="logo" href="{{ url_for('home') }}" class="logo-container"><a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='favicon/favicon.png') }}" alt="Orukami Logo" class="logo-img">
-            <span>ORU</span><span>KAMI</span></a></div>
+        <div class="logo logo-container" href="{{ url_for('home') }}"><a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='favicon/favicon.png') }}" alt="Orukami Logo" class="logo-img">
+            ORU<span>KAMI</span></a></div>
         <nav>
             <a href="{{ url_for('home') }}" class="{% if request.endpoint == 'home' %}active{% endif %}">Home</a>
             <a href="{{ url_for('origami_page') }}" class="{% if request.endpoint == 'origami_page' %}active{% endif %}">Origami</a>
             <a href="{{ url_for('games_page') }}" class="{% if request.endpoint == 'games_page' %}active{% endif %}">Games</a>
             <a href="{{ url_for('about_page') }}" class="{% if request.endpoint == 'about_page' %}active{% endif %}">About Me</a>
         </nav>
+        <!-- <nav class="navbar">
+
+            <div class="logo logo-container" href="{{ url_for('home') }}"><a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='favicon/favicon.png') }}" alt="Orukami Logo" class="logo-img">
+                ORU<span>KAMI</span></a></div>
+            </a>
+        
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+        
+            <ul class="nav-links" id="navLinks">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('games_page') }}">Games</a></li>
+                <li><a href="{{ url_for('origami_page') }}">Origami</a></li>
+                <li><a href="{{ url_for('about_page') }}">About</a></li>
+            </ul>
+        </nav> -->
     </header>
 
     {% block content %}{% endblock %}

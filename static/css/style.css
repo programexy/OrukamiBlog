@@ -38,17 +38,7 @@ header {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.logo a {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: var(--text-main);
-    text-decoration: none;
-}
 
-.logo span {
-    color: var(--accent-color);
-}
 
 nav a {
     color: var(--text-main);
@@ -435,8 +425,20 @@ footer {
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 10px; /* Space between logo image and text */
+    gap: 0; /* Space between logo image and text */
     text-decoration: none;
+}
+
+.logo-container a {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--text-main);
+    text-decoration: none;
+}
+
+.logo-container span {
+    color: var(--accent-color);
 }
 
 .logo-img {
@@ -447,11 +449,11 @@ footer {
     border: 3px solid var(--accent-color);
 }
 
-.logo-text {
+/* .logo-text {
     font-family: var(--font-heading);
-    font-size: 36px;
+    font-size: 3rem;
     font-weight: 700;
     color: var(--accent-color);
     letter-spacing: 1px;
-}
+} */
 

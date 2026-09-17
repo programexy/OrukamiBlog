@@ -90,6 +90,9 @@ def home():
 def origami_page():
     return render_template("origami.html", projects=ORIGAMI_PROJECTS)
 
+@app.route('/monking')
+def monking_page():
+    return "<a href='https://programexy.github.io/MonKing'>check htis out</a>"
 # Developer Info Data
 
 @app.route("/games")
