@@ -1,34 +1,18 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_file, abort
+from origami_projects import ORIGAMI_PROJECTS
+from games_projects import GAMES
+import io
+import os
+import zipfile
+from werkzeug.wsgi import FileWrapper
+
+BASE_DIR = "."  # Base path limiting access for security
+
+
 
 app = Flask(__name__)
 
 # Sample Game Data
-GAMES = [
-    {
-        "id": "bunny-rage",
-        "title": "ShooterBunnyRageGame",
-        "category": "Platformer / Shooter",
-        "description": "It's a bunny. It's a shooter. It's a RAGE GAME???",
-        "image": "/static/images/shooterbunnyragegame.png",
-        "game_url": "https://programexy.github.io/Shooter-bunny-rage-game/" # Sample HTML5 game
-    },
-    {
-        "id": "aoti",
-        "title": "Attack of the Insects",
-        "category": "Platformer / Shooter",
-        "description": "I know you loved the ShooterBunnyRageGame. Here is the sequel. (don't worry it's not a rage game)",
-        "image": "/static/images/aoti.png",
-        "game_url": "https://programexy.github.io/aoti"
-    },
-    {
-        "id": "monking",
-        "title": "whoops cant tell u about this one yet",
-        "category": "Platformer / Adventure",
-        "description": "Wowzers. Lions????",
-        "image": "/static/images/filedoesnotexist.png",
-        "game_url": "womp womp"
-    }
-]
 
 DEVELOPER = {
     "name": "Orukami",
@@ -38,45 +22,6 @@ DEVELOPER = {
     "github": "https://github.com/programexy",
 }
 # Sample Origami Data with featured flags
-ORIGAMI_PROJECTS = [
-    {
-        "id": "crane",
-        "title": "Classic Paper Crane",
-        "difficulty": "Intermediate",
-        "description": "bird fly fly",
-        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_-CAYXvjplClYeFsHVQMvTyHKOfOdxWnSCADNnd1v6w&s",
-        "diagram_image": "/static/images/crane_diagram.jpg",
-        "video_url": "https://www.youtube.com/embed/KfnyopxdJXQ",
-        "featured": True,
-        "steps": [
-            "Start with a square piece of paper color-side up.",
-            "Fold in half diagonally both ways, then unfold.",
-            "Turn paper over and fold in half horizontally and vertically.",
-            "Collapse into a Square Base using the existing creases.",
-            "Fold left and right edges into the center line to create a kite shape.",
-            "Perform a Petal Fold upwards on both sides to complete the Bird Base.",
-            "Narrow the legs, fold head and tail up with inside reverse folds, and pull wings gently apart."
-        ]
-    },
-    {
-        "id": "jumping-frog",
-        "title": "Interactive Hopping Frog",
-        "difficulty": "Easy",
-        "description": "boingy boing",
-        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiCO-zF4PoMsC10Gi5qkq3AtHh2R8palz-2wwLVAxXwg&s=10",
-        "diagram_image": "/static/images/frog_diagram.jpg",
-        "video_url": "https://www.youtube.com/embed/14I9l6kH9_M",
-        "featured": True,
-        "steps": [
-            "Start with a rectangular sheet of paper or fold square paper in half.",
-            "Create a Waterbomb Base on the top half of the sheet.",
-            "Fold bottom corners up to meet the nose to form front legs.",
-            "Accordion fold the bottom section to form spring-loaded hind legs.",
-            "Flip over and press the rear fold to make it jump!"
-        ]
-    }
-]
-
 @app.route("/")
 def home():
     # Filter projects marked as featured
@@ -84,7 +29,31 @@ def home():
     featured_games = GAMES[:2]
     return render_template("index.html", featured_origami=featured_origami, games=featured_games)
 
-
+@app.route('/download/<folder_name>')
+def download_any_folder(folder_name):
+    # Secure path concatenation to prevent directory traversal
+    folder_path = os.path.join(BASE_DIR, folder_name)
+    
+    if not os.path.exists(folder_path) or not os.path.isdir(folder_path):
+        abort(404, description="Folder not found")
+        
+    memory_file = io.BytesIO()
+    
+    with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zf:
+        for root, dirs, files in os.walk(folder_path):
+            for file in files:
+                full_path = os.path.join(root, file)
+                relative_path = os.path.relpath(full_path, folder_path)
+                zf.write(full_path, relative_path)
+                
+    memory_file.seek(0)
+    
+    return send_file(
+        FileWrapper(memory_file), # production safe wrapper
+        mimetype='application/zip',
+        as_attachment=True,
+        download_name=f'{folder_name}.zip'
+    )
 
 @app.route("/origami")
 def origami_page():
