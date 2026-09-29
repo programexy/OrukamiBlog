@@ -13,30 +13,32 @@
         <div class="logo logo-container" href="{{ url_for('home') }}"><a href="{{ url_for('home') }}">
             <img src="{{ url_for('static', filename='favicon/favicon.png') }}" alt="Orukami Logo" class="logo-img">
             ORU<span>KAMI</span></a></div>
-        <nav>
+        <!-- <nav>
             <a href="{{ url_for('home') }}" class="{% if request.endpoint == 'home' %}active{% endif %}">Home</a>
             <a href="{{ url_for('origami_page') }}" class="{% if request.endpoint == 'origami_page' %}active{% endif %}">Origami</a>
             <a href="{{ url_for('games_page') }}" class="{% if request.endpoint == 'games_page' %}active{% endif %}">Games</a>
             <a href="{{ url_for('about_page') }}" class="{% if request.endpoint == 'about_page' %}active{% endif %}">About Me</a>
-        </nav>
-        <!-- <nav class="navbar">
+        </nav> -->
+       <nav class="navbar">
+    <!-- Logo + Text Container -->
+            <!-- <a href="{{ url_for('about_page') }}" class="logo-container logo">
+                <img src="{{ url_for('static', filename='images/favicon.png') }}" alt="Orukami Logo" class="logo-img">
+                ORU<span>KAMI</span>
+            </a> -->
 
-            <div class="logo logo-container" href="{{ url_for('home') }}"><a href="{{ url_for('home') }}">
-                <img src="{{ url_for('static', filename='favicon/favicon.png') }}" alt="Orukami Logo" class="logo-img">
-                ORU<span>KAMI</span></a></div>
-            </a>
-        
+            <!-- Hamburger Toggle Button -->
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span class="hamburger"></span>
             </button>
-        
+
+            <!-- Navigation Links -->
             <ul class="nav-links" id="navLinks">
                 <li><a href="{{ url_for('home') }}">Home</a></li>
                 <li><a href="{{ url_for('games_page') }}">Games</a></li>
                 <li><a href="{{ url_for('origami_page') }}">Origami</a></li>
                 <li><a href="{{ url_for('about_page') }}">About</a></li>
             </ul>
-        </nav> -->
+        </nav>
     </header>
 
     {% block content %}{% endblock %}
