@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_file, abort
+from flask import Flask, render_template, send_file, abort, make_response, url_for, send_from_directory
 from origami_projects import ORIGAMI_PROJECTS
 from games_projects import GAMES
 import io
@@ -23,8 +23,6 @@ DEVELOPER = {
     "discord": "kami0ru"
 }
 # Sample Origami Data with featured flags
-
-from flask import render_template, make_response, url_for
 
 @app.route('/sitemap.xml')
 def sitemap():
@@ -93,6 +91,10 @@ def games_page():
 def about_page():
     # Show developer info on the about page
     return render_template("about.html", dev=DEVELOPER)
+
+@app.route('/robots.txt')
+def robots_txt():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'robots.txt')
 
 if __name__ == "__main__":
     app.run(debug=True)
