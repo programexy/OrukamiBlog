@@ -20,8 +20,28 @@ DEVELOPER = {
     "bio": "pls help im losin brian cells",
     "skills": ["Python / Flask", "JavaScript / HTML5", "Pygame", "Godot", "Pixel Art / Pixilart"],
     "github": "https://github.com/programexy",
+    "discord": "kami0ru"
 }
 # Sample Origami Data with featured flags
+
+from flask import render_template, make_response, url_for
+
+@app.route('/sitemap.xml')
+def sitemap():
+    # Define your site's core pages and priorities
+    pages = [
+        {'loc': url_for('home', _external=True), 'priority': '1.0'},
+        {'loc': url_for('games_page', _external=True), 'priority': '0.8'},
+        {'loc': url_for('origami_page', _external=True), 'priority': '0.8'},
+        {'loc': url_for('about_page', _external=True), 'priority': '0.5'},
+    ]
+    
+    # Render the XML template
+    xml_sitemap = render_template('sitemap.xml', pages=pages)
+    response = make_response(xml_sitemap)
+    response.headers["Content-Type"] = "application/xml"
+    return response
+
 @app.route("/")
 def home():
     # Filter projects marked as featured
